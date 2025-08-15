@@ -1,0 +1,26 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+
+*.user
+*.rsuser
+*.suo
+
+# Auto-generated files
+*.cache
+*.log
+
+# Visual Studio files
+.vs/
+
+# Others
+*.exe
+*.dll
+*.pdb
+*.db
+*.tmp
+
+
+
