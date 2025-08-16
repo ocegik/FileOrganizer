@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.Json;
 using Microsoft.VisualBasic;
+using FileOrganizer;
 
 
 public class Extension
@@ -13,7 +14,7 @@ public class Extension
     public string[] Audio { get; set; } = Array.Empty<string>();
 }
 
-class FileOrganizer
+class Program
 {
     static void Main(String[] args)
     {
@@ -24,7 +25,7 @@ class FileOrganizer
 
         if (!Directory.Exists(targetFolder))
         {
-            Console.WriteLine("The Folder doesn't exist at given path.");
+            Console.WriteLine("The folder doesn't exist at given path.");
             return;
         }
         string extensionListPath = "FileExtensionsList.json";
@@ -36,8 +37,48 @@ class FileOrganizer
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Unable to load Json file: {ex.Message} ");
+            Console.WriteLine($"Unable to load Json file: {ex.Message}");
             return;
+        }
+
+        Console.WriteLine("Choose the type of file organization you are looking for: ");
+        Console.WriteLine("1. Alike File Types in same folder");
+        Console.WriteLine("2. By Date");
+        Console.WriteLine("3. By Size");
+        Console.WriteLine("4. Extenisve organization making subfolders in file type folders");
+        Console.WriteLine("5. Other Options");
+
+        int chosenMethod = int.TryParse(Console.ReadLine(), out int method) ?method : 1;
+
+        switch (chosenMethod)
+        {
+            case 1:
+                OrganizerByFileType.Organize(targetFolder, categories);
+                break;
+
+            case 2:
+                OrganizerByDate.Organize(targetFolder);
+                break;
+            case 3:
+                OrganizerBySize.Organize(targetFolder);
+                break;
+            case 4:
+                OrganizerExtensively.Organize(targetFolder, categories);
+                break;
+            case 5:
+                HandleOtherOptions(targetFolder);
+                break;
+            default:
+                Console.WriteLine("Invalid choice, using default (1).");
+                OrganizerByFileType.Organize(targetFolder, categories);
+                break;
+        }
+
+        static void HandleOtherOptions(string targetFolder)
+        {
+            Console.WriteLine("1. Edit the Extension .json list");
+            Console.WriteLine("2. Create New json list");
+            Console.WriteLine("3. Exit");
         }
 
 
