@@ -6,13 +6,15 @@ namespace FileOrganizer
     {
         public static void Handle(string targetFolder)
         {
-            Console.WriteLine("1. Edit the Extension Json list");
-            Console.WriteLine("2. Create New json list");
-            Console.WriteLine("3. Exit");
+            string[] options = {
+                "Edit the Extension Json list",
+                "Create New Json list",
+                "Exit"
+            };
 
-            int chosenOption = int.TryParse(Console.ReadLine(), out int method) ? method : 3;
+             int choice = MenuHelper.ShowMenu("Other Options:", options, 3);
 
-            switch (chosenOption)
+            switch (choice)
             {
                 case 1:
                     Console.WriteLine("Edit .json list");

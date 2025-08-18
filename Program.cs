@@ -33,32 +33,8 @@ class Program
             return;
         }
 
-        int chosenMethod = OrganizingOptions.Options();
-
-
-        switch (chosenMethod)
-        {
-            case 1:
-                OrganizerByFileType.Organize(targetFolder, categories);
-                break;
-
-            case 2:
-                OrganizerByDate.Organize(targetFolder);
-                break;
-            case 3:
-                OrganizerBySize.Organize(targetFolder);
-                break;
-            case 4:
-                OrganizerExtensively.Organize(targetFolder, categories);
-                break;
-            case 5:
-                HandleOtherOptions.Handle(targetFolder);
-                break;
-            default:
-                Console.WriteLine("Invalid choice, using default (1).");
-                OrganizerByFileType.Organize(targetFolder, categories);
-                break;
-        }
+        OrganizingOptions.Options(targetFolder, categories);
+        
 
         static Dictionary<string, string[]> LoadCategoriesFromJson(string filePath)
         {
