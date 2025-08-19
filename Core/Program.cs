@@ -20,7 +20,7 @@ class Program
             return;
         }
 
-        string extensionListPath = "FileExtensionsList.json";
+        string extensionListPath = "Data/FileExtensionsList.json";
 
         try
         {

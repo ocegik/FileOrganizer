@@ -4,7 +4,7 @@ namespace FileOrganizer
 {
     public class LoadJsonFile
     {
-        public static Dictionary<string, string[]> LoadJson(string extensionListPath = "FileExtensionsList.json")
+        public static Dictionary<string, string[]> LoadJson(string extensionListPath = "Data/FileExtensionsList.json")
         {
             if (!File.Exists(extensionListPath))
             {
