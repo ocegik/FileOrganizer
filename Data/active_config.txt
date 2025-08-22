@@ -1,1 +1,1 @@
-FileExtensionList.json
+FileExtensionsList.json
