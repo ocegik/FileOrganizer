@@ -12,7 +12,7 @@ namespace FileOrganizer
             foreach (string file in Directory.GetFiles(targetFolder))
             {
                 string fileName = Path.GetFileName(file);
-                string categoryFolder = categorizeFile(file);
+                string categoryFolder = Sanitize(categorizeFile(file));
 
                 string destinationFolder = Path.Combine(targetFolder, categoryFolder);
                 Directory.CreateDirectory(destinationFolder);
@@ -21,7 +21,7 @@ namespace FileOrganizer
 
                 try
                 {
-                    File.Move(file, destinationPath);
+                    File.Move(file, destinationPath, overwrite: true);
                     Logger.Log(logWriter, $"Moved {fileName} → {categoryFolder}");
                     movedCount++;
                 }
@@ -31,6 +31,12 @@ namespace FileOrganizer
                 }
             }
             Console.WriteLine($"✅ Done! Moved {movedCount} files. Log saved to organizer_log.txt");
+        }
+        private static string Sanitize(string name)
+        {
+            foreach (var c in Path.GetInvalidFileNameChars())
+                name = name.Replace(c, '_');
+            return name;
         }
     }
 }
